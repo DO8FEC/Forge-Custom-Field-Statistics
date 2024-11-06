@@ -1,15 +1,14 @@
 modules:
-  jira:issuePanel:
-    - key: fieldforge-hello-world-issue-panel
+  jira:globalPage: 
+    - key: fieldforge-hello-world-global-page 
       resource: main
       resolver:
         function: resolver
       render: native
-      title: FieldForge
-      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+      title: FieldForge 
   function:
-    - key: resolver
-      handler: index.handler
+        - key: resolver
+          handler: index.handler
 resources:
   - key: main
     path: src/frontend/index.jsx
