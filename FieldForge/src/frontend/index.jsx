@@ -1,151 +1,112 @@
 import React from 'react';
-import ForgeReconciler, { Select, Heading, Text, Link, Box, Inline, ProgressBar, xcss } from '@forge/react';  // BoxとInlineを追加でインポート
+import ForgeReconciler, { Box, DynamicTable, Heading, Tab, Tabs, TabPanel, TabList, Link, PieChart, xcss } from '@forge/react';
 
-
-const ProgressBarSuccessExample = () => {
- return (
-  <ProgressBar
-   appearance="success"
-   ariaLabel="Done: 3 of 10 issues"
-   value={0.3}
-  />
-
- );
-};
-
-
-const SelectProject = () => {
- return (
-  <>
-   <Box
-    padding='space.200'
-   >
-    <Heading as="h1">Custom Field Statistics</Heading>
-   </Box>
-
-   <Box
-    xcss={{
-     borderWidth: 'border.width'
-    }}
-   >
-    <Select
-     xcss={{
-      borderWidth: 'border.width'
-     }}
-     appearance="default"
-     options={[
-      { label: 'Project A', value: 'A' },
-      { label: 'Project B', value: 'B' },
-     ]}
-    />
-   </Box>
-
-  </>
- );
-}
-
-
-// const TextStyle = xcss({
-//  color: 'color.text'
-// });
-
-// InlineExampleコンポーネントの定義
-const InlineExample = () => {
- return (
-  <>
-
-   <Inline
-    padding='space.200'
-   >
-    <Box
-     padding='space.200'
-     xcss={{
-      color: 'color.text.accent.red'
-     }}
-    >
-     <Text>Name</Text>
-    </Box>
-    <Box
-     padding='space.200'
-     xcss={{
-      color: 'color.text.accent.red'
-     }}
-    >
-     <Text>Empty Value Rate</Text>
-    </Box>
-    <Box
-     padding='space.200'
-     xcss={{
-      color: 'color.text.accent.red'
-     }}
-    >
-     <Text>Empty Value Issues</Text>
-    </Box>
-
-   </Inline>
-   <Inline>
-    <Box
-     padding='space.200'
-    // backgroundColor='color.background.discovery'
-    >
-     <Heading as="h2">Partner</Heading>
-    </Box>
-    <ProgressBarSuccessExample />
-    <Box
-     padding='space.200'
-    >
-     <Text>
-      <Link>6issues</Link>
-     </Text>
-    </Box>
-   </Inline>
-   <Inline>
-    <Box
-     padding='space.200'
-    >
-     <Heading as="h2">Net View</Heading>
-    </Box>
-    <ProgressBarSuccessExample />
-    <Box
-     padding='space.200'
-    >
-     <Text>
-      <Link>6issues</Link>
-     </Text>
-    </Box>
-   </Inline>
-   <Inline>
-    <Box
-     padding='space.200'
-    >
-     <Heading as="h2">Gross Value</Heading>
-    </Box>
-    <ProgressBarSuccessExample />
-    <Box
-     padding='space.200'
-    >
-     <Text>
-      <Link>6issues</Link>
-     </Text>
-    </Box>
-   </Inline>
-  </>
- );
-};
-
-// Appコンポーネントの定義
 const App = () => {
- return (
-  <>
-   <InlineExample />  {/* InlineExampleをここに追加 */}
-  </>
- );
+
+  const linkUrl = "https://www.atlassian.com/";
+
+  const generatePieChartWithPercentage = (percentage) => (
+    <Box xcss={{ display: 'flex', alignItems: 'center' }}>
+      <PieChart
+        data={[
+          [ 'white', 'Filled', (100 - percentage) ],
+          [ 'orange','Empty', percentage ]
+        ]}
+        width={200}
+        height={200}
+        colorAccessor={0} 
+        labelAccessor={1} 
+        valueAccessor={2} 
+      />
+      <Box xcss={{ marginLeft: '8px' }}>{percentage}%</Box>
+    </Box>
+  );
+
+  const dataA = [
+    { id: '1', cells: [{ content: <Heading as='h2'>Partner</Heading> }, { content: generatePieChartWithPercentage(70) }, { content: <Link href={linkUrl}>21 issues</Link> }] },
+    { id: '2', cells: [{ content: <Heading as='h2'>Net view</Heading> }, { content: generatePieChartWithPercentage(50) }, { content: <Link href={linkUrl}>15 issues</Link> }] },
+    { id: '3', cells: [{ content: <Heading as='h2'>VAT</Heading> }, { content: generatePieChartWithPercentage(50) }, { content: <Link href={linkUrl}>15 issues</Link> }] },
+    { id: '4', cells: [{ content: <Heading as='h2'>Gross Value</Heading> }, { content: generatePieChartWithPercentage(30) }, { content: <Link href={linkUrl}>9 issues</Link> }] }
+  ];
+
+  const dataB = [
+    { id: '1', cells: [{ content: <Heading as='h2'>Partner</Heading> }, { content: generatePieChartWithPercentage(30) }, { content: <Link href={linkUrl}>9 issues</Link> }] },
+    { id: '2', cells: [{ content: <Heading as='h2'>Net view</Heading> }, { content: generatePieChartWithPercentage(60) }, { content: <Link href={linkUrl}>18 issues</Link> }] },
+    { id: '3', cells: [{ content: <Heading as='h2'>VAT</Heading> }, { content: generatePieChartWithPercentage(20) }, { content: <Link href={linkUrl}>6 issues</Link> }] },
+    { id: '4', cells: [{ content: <Heading as='h2'>Gross Value</Heading> }, { content: generatePieChartWithPercentage(10) }, { content: <Link href={linkUrl}>3 issues</Link> }] }
+  ];
+
+  const dataC = [
+    { id: '1', cells: [{ content: <Heading as='h2'>Partner</Heading> }, { content: generatePieChartWithPercentage(50) }, { content: <Link href={linkUrl}>15 issues</Link> }] },
+    { id: '2', cells: [{ content: <Heading as='h2'>Net view</Heading> }, { content: generatePieChartWithPercentage(50) }, { content: <Link href={linkUrl}>15 issues</Link> }] },
+    { id: '3', cells: [{ content: <Heading as='h2'>VAT</Heading> }, { content: generatePieChartWithPercentage(30) }, { content: <Link href={linkUrl}>9 issues</Link> }] },
+    { id: '4', cells: [{ content: <Heading as='h2'>Gross Value</Heading> }, { content: generatePieChartWithPercentage(30) }, { content: <Link href={linkUrl}>9 issues</Link> }] }
+  ];
+
+  return (
+    <>
+      <Heading as="h1">Custom Filled Statistics</Heading>
+      <Tabs id="default">
+        <TabList>
+          <Tab>ProjectA</Tab>
+          <Tab>ProjectB</Tab>
+          <Tab>ProjectC</Tab>
+        </TabList>
+
+        <TabPanel>
+          <Box xcss={{ width: '80%', padding: '8px', margin: 'space.200' }}>
+            <DynamicTable
+              rowsPerPage={5}
+              head={{
+                cells: [
+                  { content: 'Name', isSortable: true },
+                  { content: 'Empty Value Rate', isSortable: true },
+                  { content: 'Empty Value Issues', isSortable: true }
+                ]
+              }}
+              rows={dataA}
+            />
+          </Box>
+        </TabPanel>
+
+        <TabPanel>
+          <Box xcss={{ width: '80%', padding: '8px', margin: 'space.200' }}>
+            <DynamicTable
+              rowsPerPage={5}
+              head={{
+                cells: [
+                  { content: 'Name', isSortable: true },
+                  { content: 'Empty Value Rate', isSortable: true },
+                  { content: 'Empty Value Issues', isSortable: true }
+                ]
+              }}
+              rows={dataB}
+            />
+          </Box>
+        </TabPanel>
+
+        <TabPanel>
+          <Box xcss={{ width: '80%', padding: '8px', margin: 'space.200' }}>
+            <DynamicTable
+              rowsPerPage={5}
+              head={{
+                cells: [
+                  { content: 'Name', isSortable: true },
+                  { content: 'Empty Value Rate', isSortable: true },
+                  { content: 'Empty Value Issues', isSortable: true }
+                ]
+              }}
+              rows={dataC}
+            />
+          </Box>
+        </TabPanel>
+      </Tabs>
+    </>
+  );
 };
 
-// ForgeReconcilerでのレンダリング
 ForgeReconciler.render(
- <React.StrictMode>
-  <SelectProject />
-  <App />
- </React.StrictMode>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
