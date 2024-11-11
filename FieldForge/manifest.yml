@@ -5,13 +5,16 @@ modules:
       resolver:
         function: resolver
       render: native
-      title: FieldForge 
+      title: Custom Field Statistics 
+      icon: resource:logo;image/JiraLogo.png
   function:
         - key: resolver
           handler: index.handler
 resources:
   - key: main
     path: src/frontend/index.jsx
+  - key: logo
+    path: src/assets
 app:
   runtime:
     name: nodejs20.x
