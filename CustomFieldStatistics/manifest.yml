@@ -1,0 +1,21 @@
+modules:
+  jira:globalPage:
+    - key: fieldforge-hello-world-global-page
+      function: main
+      render: native
+      title: Custom Field Statistics
+      icon: resource:logo;image/logo.png
+  function:
+    - key: main
+      handler: index.run
+resources:
+
+  - key: logo
+    path: src/assets
+app:
+  runtime:
+    name: nodejs20.x
+  id: ari:cloud:ecosystem::app/6493f643-ea64-4fcc-bdae-7a2b6d64a1ce
+permissions:
+  scopes:
+    - read:jira-work
