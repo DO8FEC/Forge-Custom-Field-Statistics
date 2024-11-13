@@ -6,7 +6,7 @@ modules:
         function: resolver
       render: native
       title: Custom Field Statistics 
-      icon: resource:logo;image/JiraLogo.png
+      icon: resource:logo;image/logo.png
   function:
         - key: resolver
           handler: index.handler
