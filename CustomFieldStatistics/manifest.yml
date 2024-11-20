@@ -1,17 +1,19 @@
 modules:
   jira:globalPage:
-    - key: fieldforge-hello-world-global-page
-      function: main
-      render: native
+    - key: custom-field-stats-global-page
+      resource: main
+      resolver:
+        function: resolver
       title: Custom Field Statistics
-      icon: resource:logo;image/logo.png
+      icon: resource:logo;logo.png
   function:
-    - key: main
-      handler: index.run
+    - key: resolver
+      handler: index.handler
 resources:
-
+  - key: main
+    path: static/custom-field-stats/build
   - key: logo
-    path: src/assets
+    path: static/assets
 app:
   runtime:
     name: nodejs20.x

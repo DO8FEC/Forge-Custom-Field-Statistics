@@ -1,0 +1,140 @@
+/* Container styles */
+.app-container {
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Project selection dropdown styling */
+select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 20px;
+  width: 20%;
+}
+
+/* Project details heading */
+.project-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Custom Fields Table */
+.custom-fields-table {
+  margin-top: 20px;
+}
+
+.custom-fields-table h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  background-color: #ffde59;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.colum-titles{
+  font-size: 18px;
+}
+
+.custom-fields-name {
+  font-size: 18px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 50px;
+  line-height: 2.5;
+}
+
+th {
+  color: #888;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Name column styling */
+td:first-child {
+  font-weight: bold;
+}
+
+/* Progress bar styling */
+.empty-value-rate-container {
+  display: flex;
+  gap: 8px; 
+  padding: 15px;
+}
+
+.empty-rate-value-percentage {
+  font-size: 15px;
+  color: #555;
+}
+
+.number-of-issues {
+  font-size: 18px;
+  text-align: center;
+  color: #5271ff;
+  text-decoration: underline;
+  cursor: pointer;
+  display: block;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-content li {
+  margin-bottom: 8px;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #5271ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #0056b3;
+}
