@@ -104,11 +104,14 @@ td:first-child {
 
 .modal-content {
   background: #fff;
+
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
+  width: 80%;
   max-width: 90%;
+  max-height: 80%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .modal-content h3 {
@@ -117,8 +120,12 @@ td:first-child {
 }
 
 .modal-content ul {
+  padding: 16px;
+  max-height: calc(80vh - 60px); 
+  overflow-y: auto;
   list-style: none;
   padding: 0;
+  
 }
 
 .modal-content li {
