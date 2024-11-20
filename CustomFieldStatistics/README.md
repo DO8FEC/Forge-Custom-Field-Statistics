@@ -1,6 +1,6 @@
-# Forge Hello World
+# Custom Field Statistics Forge App
 
-This project contains a Forge app written in Javascript that displays `Hello World!` in a Jira issue panel. 
+This app enhances Jira's reporting by offering real-time insights into custom fields on a per-project basis.
 
 See [developer.atlassian.com/platform/forge/](https://developer.atlassian.com/platform/forge) for documentation and tutorials explaining Forge.
 
