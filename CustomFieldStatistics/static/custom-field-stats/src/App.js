@@ -44,8 +44,8 @@ function Modal({ isOpen, onClose, issues }) {
 
 function App() {
   const [projects, setProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [fieldStatistics, setFieldStatistics] = useState([]);
+  const [selectedProjects, setSelectedProjects] = useState([]);
+  const [projectStatistics, setProjectStatistics] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -67,14 +67,25 @@ function App() {
 
   const handleProjectChange = async (event) => {
     const selectedValue = event.target.value;
+
+    // Check if the project is already selected
+    if (selectedProjects.some((proj) => proj.value === selectedValue)) {
+      alert('Project already selected!');
+      return;
+    }
+
     const project = projects.find((p) => p.value === selectedValue);
-    setSelectedProject(project);
 
     if (project) {
       setLoading(true);
       try {
         const statistics = await invoke('getFieldStatistics', { projectKey: project.key });
-        setFieldStatistics(statistics);
+        // Append the new project and its statistics
+        setSelectedProjects((prev) => [...prev, project]);
+        setProjectStatistics((prev) => [
+          ...prev,
+          { projectName: project.label, statistics },
+        ]);
       } catch (err) {
         console.error('Error fetching field statistics:', err);
         setError('Failed to fetch field statistics.');
@@ -82,6 +93,11 @@ function App() {
         setLoading(false);
       }
     }
+  };
+
+  const clearResults = () => {
+    setSelectedProjects([]);
+    setProjectStatistics([]);
   };
 
   const openModalWithIssues = (issueLinks) => {
@@ -103,9 +119,25 @@ function App() {
         ))}
       </select>
 
-      {selectedProject && fieldStatistics.length > 0 && (
-        <div className="custom-fields-table">
-          <h2>{selectedProject.label}</h2>
+      <button
+        onClick={clearResults}
+        style={{
+          marginTop: '10px',
+          marginLeft: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#d9534f',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
+      >
+        Clear Results
+      </button>
+
+      {projectStatistics.map((projectStat, index) => (
+        <div key={index} className="custom-fields-table" style={{ marginTop: '20px' }}>
+          <h2>{projectStat.projectName}</h2>
           <table>
             <thead>
               <tr className="colum-titles">
@@ -115,7 +147,7 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {fieldStatistics.map((stat) => (
+              {projectStat.statistics.map((stat) => (
                 <tr key={stat.id}>
                   <td className="custom-fields-name">{stat.name}</td>
                   <td>
@@ -138,6 +170,7 @@ function App() {
                         openModalWithIssues(stat.issueLinks);
                       }}
                       className="number-of-issues"
+                      style={{ textAlign: "left", display: "block" }}
                     >
                       {stat.emptyValueIssues} issues
                     </a>
@@ -147,7 +180,7 @@ function App() {
             </tbody>
           </table>
         </div>
-      )}
+      ))}
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} issues={issueList} />
     </div>

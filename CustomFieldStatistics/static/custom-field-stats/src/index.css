@@ -82,7 +82,7 @@ td:first-child {
 
 .number-of-issues {
   font-size: 18px;
-  text-align: center;
+  text-align: left;
   color: #5271ff;
   text-decoration: underline;
   cursor: pointer;
